@@ -15,13 +15,13 @@ Boonyawee Kiatsilp 6031034121
 
 <img src="./scenario_a.png">
 
-<br /> จาก Scenario A แสดงให้เห็นว่ามีการทำงานแบบ Sequential กัน โดยมีการ insert หนังสือตั้งแต่ 1 เล่มถึง 100 เล่ม และมีการทดลองจับเวลา จากกราฟสามารถสรุปได้ว่าเมื่อเปรียบเทียบ performance กันจะเห็นได้ว่า GRPC มี performance ดีกว่า เนื่องจากใช้เวลาน้อยกว่า REST API
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จาก Scenario A แสดงให้เห็นว่ามีการทำงานแบบ Sequential กัน โดยมีการ insert หนังสือตั้งแต่ 1 เล่มถึง 100 เล่ม และมีการทดลองจับเวลา จากกราฟสามารถสรุปได้ว่าเมื่อเปรียบเทียบ performance กันจะเห็นได้ว่า gRPC มี performance ดีกว่า เนื่องจากใช้เวลาน้อยกว่า REST API
 
 **Scenario B:** Multiple clients with different kind of calls
 
 <img src="./scenario_b.png">
 
-<br /> จาก Scenario B แสดงให้เห็นว่ามีการทำงานแบบ Concurrent กัน โดยมีการ random call จากหลาย ๆ client โดยใน random call มี service ทั้งหมด ดังนี้ get, list, insert และ delete ซึ่งในการทดลองนี้มี client ตั้งแต่ 1 คนถึง 100 คน และมีการทดลองจับเวลา จากกราฟสามารถสรุปได้ว่าเมื่อเปรียบเทียบ performance กันจะเห็นได้ว่า REST API มี performance ดีกว่า เนื่องจากใช้เวลาน้อยกว่า GRPC
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จาก Scenario B แสดงให้เห็นว่ามีการทำงานแบบ Concurrent กัน โดยมีการ random call จากหลาย ๆ client โดยใน random call มี service ทั้งหมด ดังนี้ get, list, insert และ delete ซึ่งในการทดลองนี้มี client ตั้งแต่ 1 คนถึง 100 คน และมีการทดลองจับเวลา จากกราฟสามารถสรุปได้ว่าเมื่อเปรียบเทียบ performance กันจะเห็นได้ว่า REST API มี performance ดีกว่า เนื่องจากใช้เวลาน้อยกว่า gRPC
 
 **Scenario C (get):** Vary the number of concurrent calls from 1 to 4096 calls
 
@@ -29,12 +29,12 @@ Boonyawee Kiatsilp 6031034121
 
 **Scenario C (list):** Vary the number of concurrent calls from 1 to 4096 calls
 
-<br /> จาก Scenario C ทั้งสองรูป เราได้ทดลองกับ service get และ list แสดงให้เห็นว่ามีการทำงานแบบ Concurrent กัน โดยมีจำนวน call ตั้งแต่ 1 ถึง 4096 และมีการทดลองจับเวลา จากกราฟสามารถสรุปได้ว่าเมื่อเปรียบเทียบ performance กันจะเห็นได้ว่า REST API มี performance ดีกว่า เนื่องจากใช้เวลาน้อยกว่า GRPC
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; จาก Scenario C ทั้งสองรูป เราได้ทดลองกับ service get และ list แสดงให้เห็นว่ามีการทำงานแบบ Concurrent กัน โดยมีจำนวน call ตั้งแต่ 1 ถึง 4096 และมีการทดลองจับเวลา จากกราฟสามารถสรุปได้ว่าเมื่อเปรียบเทียบ performance กันจะเห็นได้ว่า REST API มี performance ดีกว่า เนื่องจากใช้เวลาน้อยกว่า gRPC
 
 <img src="./scenario_c_list.png">
 
 ### Discussion of the results why one method is better the other in which scenarios.
-จากผลการทดลองข้างต้นทั้ง 3 Scenaio จะเห็นได้ว่าเมื่อเป็นการทำงานแบบ Sequential GRPC ใช้เวลาในการทำงานน้อยกว่า REST API ในขณะที่เป็นการทำงานแบบ concurrent REST API จะใช้เวลาทำงานน้อยกว่า GRPC เนื่องจาก REST API สนับสนุนเฉพาะ request-response model ที่มีอยู่ใน HTTP 1.x. แต่ gRPC ใช้ประโยชน์จากความสามารถของ HTTP / 2 อย่างเต็มที่และทำให้สามารถ stream ข้อมูลได้ตลอดเวลา
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จากผลการทดลองข้างต้นทั้ง 3 Scenaio จะเห็นได้ว่าเมื่อเป็นการทำงานแบบ Sequential gRPC ใช้เวลาในการทำงานน้อยกว่า REST API ในขณะที่เป็นการทำงานแบบ concurrent REST API จะใช้เวลาทำงานน้อยกว่า gRPC เนื่องจาก REST API สนับสนุนเฉพาะ request-response model ที่มีอยู่ใน HTTP 1.x. แต่ gRPC ใช้ประโยชน์จากความสามารถของ HTTP / 2 อย่างเต็มที่และทำให้สามารถ stream ข้อมูลได้ตลอดเวลา
 ### Comparison of the gRPC and REST API from the aspects of language neutral, ease of use, and performance.
 **Language neutral**
 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ทั้ง gRPC และ REST API มี language neutral ที่เหมือนกัน และเนื่องจากในกรณีนี้ใช้ภาษา JavaScript ในการ implement ทั้งคู่ จึงทำให้ไม่มีผลกระทบของความต่างทางภาษามากนัก แต่โดยปกติแล้ว ทั้ง gRPC และ REST API สามารถ implement ได้หลายภาษาขึ้นอยู่กับความเหมาะสมต่างๆ
@@ -46,3 +46,4 @@ Boonyawee Kiatsilp 6031034121
 <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;จากการทดสอบในกรณีนี้แสดงให้เห็นว่า ในกรณีที่มีการเรียก call แบบ sequence จะมีประสิทธิภาพมากกว่าใน gRPC และในการเรียก call แบบ concurrent จะมีประสิทธิภาพมากกว่าใน REST API เนื่องจาก REST API สนับสนุนเฉพาะ request-response model ที่มีอยู่ใน HTTP 1.x. แต่ gRPC ใช้ประโยชน์จากความสามารถของ HTTP / 2 อย่างเต็มที่และทำให้สามารถ stream ข้อมูลได้ตลอดเวลา
 
 ### Does your results comply with the results in https://medium.com/@bimeshde/grpc-vs-rest-performance-simplified-fd35d01bbd4? How?
+<br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ผลลัพธ์เมื่อเปรียบเทียบผลการทดลองของกลุ่มเรากับ medium ดังกล่าว ค่อนข้างใกล้เคียงกัน ทั้งหัวข้อ performance และ ease of use เนื่องจากผลการทดลอง และสรุปผลไปในทิศทางเดียวกันที่ว่า gRPC เหมาะสำหรับ internal service และใช้ REST API ในการรองรับ external client และอื่น ๆ ที่ไม่ใช่ภายใน แต่ในส่วนของ Programming Language ที่ใช้แตกต่างกัน โดยกลุ่มของเราใช้ JavaScript ในการ implement ในขณะที่ medium ใช้ goLang
