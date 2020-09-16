@@ -17,8 +17,13 @@ Boonyawee Kiatsilp 6031034121
 
 
 ### Comparison of the gRPC and REST API from the aspects of language neutral, ease of use, and performance.
-#### Language neutral
-#### Ease of use
-#### Performance
+**Language neutral**
+  ทั้ง gRPC และ REST API มี language neutral ที่เหมือนกัน และเนื่องจากในกรณีนี้ใช้ภาษา JavaScript ในการ implement ทั้งคู่ จึงทำให้ไม่มีผลกระทบของความต่างทางภาษามากนัก แต่โดยปกติแล้ว ทั้ง gRPC และ REST API สามารถ implement ได้หลายภาษาขึ้นอยู่กับความเหมาะสมต่างๆ
+
+**Ease of use**
+  REST API มีความเหมาะสมสำหรับทั้งใช้กับระบบปิดภายใน และระบบเปิดที่มีการติดต่อสื่อสารหรือมีการเปิดเผยทรัพยากรภายในกับภายนอก ในขณะที่ gRPC ยังขาดคุณคุณสมบัติบางส่วน ทำให้เหมาะสมกับการใช้งานภายในระบบปิดที่ไม่ยุ่งเกี่ยวกับภายนอก ทำให้โดยทั่วไปแล้ว REST API จะมีความนิยมมากกว่า gRPC แต่ด้วยความที่ gRPC จะเรียกใช้ procedure จาก server ที่ทำงานอยู่โดยตรง แทนที่จะส่ง Request ด้วย HTTP Protocol เพื่อให้ server ทำงาน อย่าง REST API ทำให้ gRPC implement ได้ง่ายกว่า
+
+**Performance**
+  จากการทดสอบในกรณีนี้แสดงให้เห็นว่า ในกรณีที่มีการเรียก call แบบ sequence จะมีประสิทธิภาพมากกว่าใน gRPC และในการเรียก call แบบ concurren จะมีประสิทธิภาพมากกว่าใน REST API เนื่องจาก REST API สนับสนุนเฉพาะ request-response model ที่มีอยู่ใน HTTP 1.x. แต่ gRPC ใช้ประโยชน์จากความสามารถของ HTTP / 2 อย่างเต็มที่และทำให้สามารถ stream ข้อมูลได้ตลอดเวลา
 
 ### Does your results comply with the results in https://medium.com/@bimeshde/grpc-vs-rest-performance-simplified-fd35d01bbd4? How?
