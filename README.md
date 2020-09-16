@@ -17,6 +17,8 @@ Boonyawee Kiatsilp 6031034121
 
 
 ### Comparison of the gRPC and REST API from the aspects of language neutral, ease of use, and performance.
-
+#### Language neutral
+#### Ease of use
+#### Performance
 
 ### Does your results comply with the results in https://medium.com/@bimeshde/grpc-vs-rest-performance-simplified-fd35d01bbd4? How?
